@@ -1,75 +1,92 @@
-import { useEffect, useState } from 'react'
+import Data from './Data'
 
-import homeIcon from '../../assets/icons/home.svg'
-import playlistIcon from '../../assets/icons/playlist.svg'
-import radioIcon from '../../assets/icons/radio.svg'
-import videoIcon from '../../assets/icons/videos.svg'
-import profileIcon from '../../assets/icons/profile.svg'
-import logoutIcon from '../../assets/icons/logout.svg'
+import SideNav from '../../components/sideNav/SideNav'
+import Player from '../../components/player/Player'
+
 import heartFull from '../../assets/icons/heart-white.svg'
 
 import vector from '../../assets/images/vector.svg'
 import heroImage from '../../assets/images/hero-img.png'
-import banner from '../../assets/images/rectangle-26.png'
 
 import ChartCard from './Card'
 import Likes from './Likes'
 import ListContainer from './ListContainer'
 import MusicList from './MusicList'
 
+import { useEffect, useState } from 'react'
+
+
 function Home(){
-    const [musicData, getMusicData] = useState([])
+    const [musicData, setMusicData] = useState(Data.tracks.items)
+    const [playList, setPlaylist] = useState(Data.playlists.items)
+    //Array index numbers for top charts
+    const randomThree = [4, 5, 9]
 
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'a9a891e077msh8567b489f05bc8ep142735jsn805f0b5339b0',
+            'X-RapidAPI-Key': 'f28500c067msh18ae182692dc780p1c5676jsn17cbf229ab0e',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
 
-
     useEffect(() => {  
-        // fetching data from Spotify
-        fetch('https://spotify23.p.rapidapi.com/search/?q=%3CREQUIRED%3E&type=tracks&offset=0&limit=10&numberOfTopResults=5', options)
-        // fetch('https://spotify23.p.rapidapi.com/tracks/?ids=4WNcduiCmDNfmTEz7JvmLv', options)
-            .then(response => response.json())
-            .then(response => getMusicData(response.tracks.items))
-            .catch(err => console.error(err));
+        // fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=37i9dQZF1EQpj7X7UK8OOF&offset=0&limit=10', options)
+        // .then(response => response.json())
+        // .then(response => console.log(response))
+        // .catch(err => console.error(err));
     }, [])
 
     //Map through the musicData and display them
-    const musics = musicData.map(({data}) => {
-        return (
-            <MusicList 
-                key={data.id}
-                img={data.albumOfTrack.coverArt.sources[2].url}
-                title = {data.albumOfTrack.name} 
-                artist = {data.artists.items[0].profile.name} 
-            />
-        )
+    const newRelease = musicData.map(({data}, index) => {
+        if(index < 10){
+            return (
+                <MusicList 
+                    key={data.id}
+                    img={data.albumOfTrack.coverArt.sources[2].url}
+                    title = {data.albumOfTrack.name} 
+                    artist = {data.artists.items[0].profile.name} 
+                />
+            )
+        }
     })
 
+    const popular = musicData.map(({data}, index) => {
+        if(index >= 10){
+            return (
+                <MusicList 
+                    key={data.id}
+                    img={data.albumOfTrack.coverArt.sources[2].url}
+                    title = {data.albumOfTrack.name} 
+                    artist = {data.artists.items[0].profile.name} 
+                />
+            )
+        }
+    })
+
+    //Pick three random music as top charts
+    const topCharts = playList.map(({data}, index) => {
+        console.log(data)
+        if(randomThree.includes(index)){
+            return (<ChartCard
+                key = {data.id}
+                img = {data.images.items[0].sources[0].url}
+                title = {data.name} 
+                artist = {data.owner.name}
+                // length = {convertMilliseconds(data.duration.totalMilliseconds)}
+            />)
+        }
+    })
 
     console.log(musicData)
 
     return(
         <main className="flex">
-            <aside className='mr-6'>
-                <div className='bg-dark-alt rounded-[2rem] px-4 py-7 mb-5'>
-                    <img src={homeIcon} className="pb-8"/>
-                    <img src={playlistIcon} className="pb-8" />
-                    <img src={radioIcon} className="pb-8"/>
-                    <img src={videoIcon} />
-                </div>
-                <div className='bg-dark-alt rounded-[2rem] px-4 py-7'>
-                    <img src={profileIcon} className="pb-8"/>
-                    <img src={logoutIcon} />
-                </div>
-            </aside>
-            <div className='w-full'>
+            {/* <Player /> */}
+            <SideNav />
+            <div className='w-full overflow-hidden'>
                 <section className='flex mb-10'>
-                    <div className='bg-[#609EAF] h-[373px] w-2/3 relative rounded-[40px] flex  text-white mr-6 overflow-hidden'>
+                    <div className='bg-[#609EAF] h-[373px] w-2/3 relative rounded-[40px] flex  text-white mr-6 overflow-hidden shadow-[0_15px_22px_-20px_rgba(122,144,150,1)]'>
                         <img src={vector} className="absolute right-0 -"/>
                         <div className='h-full flex flex-col justify-between py-[38px] px-[45px] z-10'>
                             <span>Curated playlist</span>
@@ -109,76 +126,19 @@ function Home(){
                     </div>
                     <div className='w-1/3'>
                         <h2 className='text-white text-2xl font-bold mb-3.5'>Top Charts</h2>
-                        <ChartCard
-                            img = {heroImage}
-                            title = "Golden age of 80s"
-                            artist = "Sean Swadder"
-                            length = "2:34:25"
-                        />
-                        <ChartCard
-                            img = {heroImage}
-                            title = "Golden age of 80s"
-                            artist = "Sean Swadder"
-                            length = "2:34:25"
-                        />
-                        <ChartCard
-                            img = {heroImage}
-                            title = "Golden age of 80s"
-                            artist = "Sean Swadder"
-                            length = "2:34:25"
-                        />
+                        {topCharts}
                     </div> 
                 </section>
                 <div>
                     <h3 className="text-2xl font-bold mb-3 text-white">New releases.</h3>
                     <ListContainer>
-                        {musics}
+                        {newRelease}
                     </ListContainer>
                 </div>
                 <div>
-                    <h3 className="text-2xl font-bold mb-3 text-white">New releases.</h3>
+                    <h3 className="text-2xl font-bold mb-3 text-white">Popular in your area</h3>
                     <ListContainer>
-                        <MusicList 
-                            img={banner}
-                            title = "Testimony" 
-                            artist = "Olumide"
-                        />
-                        <MusicList 
-                            img={banner}
-                            title = "Testimony" 
-                            artist = "Olumide"
-                        />
-<MusicList 
-                            img={banner}
-                            title = "Testimony" 
-                            artist = "Olumide"
-                        />
-<MusicList 
-                            img={banner}
-                            title = "Testimony" 
-                            artist = "Olumide"
-                        />
-<MusicList 
-                            img={banner}
-                            title = "Testimony" 
-                            artist = "Olumide"
-                        />
-<MusicList 
-                            img={banner}
-                            title = "Testimony" 
-                            artist = "Olumide"
-                        />
-<MusicList 
-                            img={banner}
-                            title = "Testimony" 
-                            artist = "Olumide"
-                        />
-<MusicList 
-                            img={banner}
-                            title = "Testimony" 
-                            artist = "Olumide"
-                        />
-
+                        {popular}
                     </ListContainer>
                 </div>
                 

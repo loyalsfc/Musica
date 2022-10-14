@@ -3,7 +3,7 @@ import heart from '../../assets/icons/heart.svg'
 
 function ChartCard({img, title, artist, length}){
     return (
-        <div className="p-4 bg-dark-alt flex items-center rounded-3xl mb-3 h-24">
+        <div className="p-4 bg-dark-alt flex items-center rounded-3xl mb-3">
             <img src={img} className='h-16 w-16 rounded-xl mr-3' alt="music image" />
             <article>
                 <h4 className="text-[17px] mb-1 leading-5 text-white">{title}</h4>

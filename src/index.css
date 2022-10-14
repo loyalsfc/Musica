@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .buttons-play {
+    @apply rounded-full bg-white/[0.07] p-3 text-xs flex mr-2 backdrop-blur-sm
+  }
+}
+
 * {
-  /* overflow: hidden; */
+  /* overflow-x: hidden; */
   font-family: 'Quicksand', sans-serif;
   /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none;  /* IE and Edge */
@@ -14,3 +20,8 @@
 *::-webkit-scrollbar {
   display: none;
 }
+
+.player{
+  overflow-x: visible !important;
+}
+
