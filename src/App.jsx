@@ -21,8 +21,8 @@ function App() {
       <div className='container mx-auto'>
         <Header />
         {/* <Home /> */}
-        <Playlist />
-        {/* <Collection /> */}
+        {/* <Playlist /> */}
+        <Collection />
       </div>
     </div>
   )
