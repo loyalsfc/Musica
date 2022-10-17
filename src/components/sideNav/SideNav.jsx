@@ -1,3 +1,6 @@
+import { useContext } from 'react'
+import { Context } from '../../Context'
+
 import logo from '../../assets/icons/logo.svg'
 import homeIcon from '../../assets/icons/home.svg'
 import playlistIcon from '../../assets/icons/playlist.svg'
@@ -8,18 +11,20 @@ import logoutIcon from '../../assets/icons/logout.svg'
 import { Link } from 'react-router-dom'
 
 function SideNav(){
+    const {setPlaylistBG} = useContext(Context)
+
     return(
         <aside className='mr-6'>
             <div className='bg-dark-alt rounded-[2rem] px-4 py-7 mb-5'>
                 <Link to="/">
-                    <svg width="22" height="22" className='mb-8 transition-all hover:scale-125' viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="22" height="22" onClick={()=>setPlaylistBG(false)} className='mb-8 transition-all hover:scale-125' viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g opacity="1">
                         <path d="M8.38171 19.0503V16.239C8.3817 15.5266 8.96099 14.9478 9.67852 14.9433H12.3132C13.0339 14.9433 13.6182 15.5234 13.6182 16.239V19.0421C13.6182 19.66 14.1203 20.1622 14.7427 20.1667H16.5401C17.3796 20.1688 18.1855 19.8392 18.7799 19.2507C19.3742 18.6621 19.7083 17.8629 19.7083 17.0294V9.0437C19.7083 8.37045 19.4077 7.73183 18.8875 7.29989L12.781 2.45142C11.7136 1.60337 10.1891 1.63077 9.15323 2.51661L3.17805 7.29989C2.6333 7.7191 2.30772 8.35961 2.29163 9.0437V17.0213C2.29163 18.7584 3.71006 20.1667 5.45978 20.1667H7.21623C7.51587 20.1688 7.80399 20.0522 8.01664 19.8426C8.2293 19.633 8.34889 19.3478 8.34888 19.0503H8.38171Z" fill="#FACD66"/>
                         </g>
                     </svg>
                 </Link>
                 <Link to="/collection">
-                    <svg width="22" height="22" className='mb-8 transition-all hover:scale-125' viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="22" height="22" onClick={()=>setPlaylistBG(false)} className='mb-8 transition-all hover:scale-125' viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.5834 4.35416H14.6667V2.98832C14.6667 2.22749 14.0434 1.60416 13.2825 1.60416H8.71754C7.95671 1.60416 7.33337 2.22749 7.33337 2.98832V4.35416H6.41671C5.40837 4.35416 4.58337 5.17916 4.58337 6.18749V6.30666C4.87671 6.22416 5.17921 6.18749 5.50004 6.18749H16.5C16.8209 6.18749 17.1234 6.22416 17.4167 6.30666V6.18749C17.4167 5.17916 16.5917 4.35416 15.5834 4.35416Z" fill="#EFEEE0" fill-opacity="0.25"/>
                         <path d="M12.7692 15.5192C12.4759 15.5192 12.2467 15.7575 12.2467 16.0417C12.2467 16.3258 12.485 16.5642 12.7692 16.5642C13.0534 16.5642 13.2917 16.3258 13.2917 16.0417C13.2917 15.7575 13.0534 15.5192 12.7692 15.5192Z" fill="#EFEEE0" fill-opacity="0.25"/>
                         <path d="M8.31413 16.3258C8.02079 16.3258 7.79163 16.5642 7.79163 16.8483C7.79163 17.1325 8.02996 17.3708 8.31413 17.3708C8.59829 17.3708 8.83663 17.1325 8.83663 16.8483C8.83663 16.5642 8.60746 16.3258 8.31413 16.3258Z" fill="#EFEEE0" fill-opacity="0.25"/>

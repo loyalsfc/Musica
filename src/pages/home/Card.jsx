@@ -2,11 +2,15 @@ import { Link } from 'react-router-dom'
 import heart from '../../assets/icons/heart.svg'
 
 
-function ChartCard({playlistId, img, title, artist, length}){
-    console.log(playlistId)
+function ChartCard({playlistId, img, title, artist, length, handleClick, description}){
     return (
         <Link to={`/playlist/${playlistId}`}>
-            <div className="p-4 bg-dark-alt flex items-center rounded-3xl mb-3">
+            <div className="p-4 bg-dark-alt flex items-center rounded-3xl mb-3" 
+                onClick={handleClick}
+                data-banner = {img}
+                data-title = {title}
+                data-description = {description}
+            >
                 <img src={img} className='h-16 w-16 rounded-xl mr-3' alt="music image" />
                 <article>
                     <h4 className="text-[17px] mb-1 leading-5 text-white">{title}</h4>

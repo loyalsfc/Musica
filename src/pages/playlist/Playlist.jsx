@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useParams } from "react-router-dom"
+
+import { Context } from "../../Context"
 
 import playlistTracks from '../../../tracks'
 
@@ -16,23 +18,18 @@ import heartIcon from '../../assets/icons/red-heart.svg'
 
 function Playlist(){
     const {playlistId} = useParams();
+    const {playlistBG, playlistTitle, playlistDescription} = useContext(Context)
+
 
     const [tracks, setTracks] = useState([])//trackDetails.items)
-    const styles = {
-        background: `linear-gradient(180deg, rgba(29, 33, 35, 0.8) 0%, #1D2123 61.48%), url(${leadImage})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-    }
-
-    //Get the playlist that matches the Id
-    const currentPlaylist = playlistTracks.playlist.filter(item => item.id == playlistId)
-    setTracks('currentPlaylist[0].items')
-
-    console.log(currentPlaylist[0].items)
+   
     console.log(tracks)
 
     useEffect(()=>{
+         //Get the playlist that matches the Id
+        const currentPlaylist = playlistTracks.playlist.filter(item => item.id == playlistId)
+        setTracks(currentPlaylist[0].items)
+
         // const options = {
         //     method: 'GET',
         //     headers: {
@@ -47,8 +44,7 @@ function Playlist(){
         //     .catch(err => console.error(err));
     }, [])
 
-    let musicTracks = currentPlaylist.map((item, index) => {
-        console.log(item)
+    let musicTracks = tracks.map((item, index) => {
         return(
             <MusicCard 
                 key={index}
@@ -64,10 +60,10 @@ function Playlist(){
     return(
             <section className="w-full text-white">
                 <div className="flex items-end mb-12">
-                    <img src={leadImage} width="288" alt="banner image" className="mr-7" />
+                    <img src={playlistBG} width="288" alt="banner image" className="mr-7 rounded-[35px]" />
                     <article>
-                        <h4 className="text-4xl font-bold mb-2 text-[#A4C7C6]">Tomorrows tunes</h4>
-                        <p className="text-sm text-[#EFEEE0] mb-2.5 max-w-[33rem]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit consequatur repellat ullam et nesciunt officiis itaque asperiores consectetur eos tempore.</p>
+                        <h4 className="text-4xl font-bold mb-2 text-[#A4C7C6]">{playlistTitle}</h4>
+                        <p className="text-sm text-[#EFEEE0] mb-2.5 max-w-[33rem]">{playlistDescription}</p>
                         <p className="text-sm text-[#EFEEE0]">10 songs ~ 1hr+</p>
                         <div className="flex mt-10">
                         <button className="buttons-play">

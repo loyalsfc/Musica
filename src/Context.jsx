@@ -1,8 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 const Context = React.createContext()
 
 
 function ContextProvider(props){
+    const [playlistBG, setPlaylistBG] = useState();
+    const [playlistTitle, setPlaylistTitle] = useState();
+    const [playlistDescription, setPlaylistDescription] = useState();
+
+
+
     // Convert milliseconds to minute and seconds
     function millisecondsToMinute(milliseconds){
         const second = Math.floor(milliseconds / 1000);
@@ -12,7 +18,15 @@ function ContextProvider(props){
     }
 
     return(
-        <Context.Provider value={{millisecondsToMinute}}>
+        <Context.Provider 
+            value={{millisecondsToMinute, 
+                playlistBG, 
+                setPlaylistBG, 
+                playlistTitle, 
+                setPlaylistTitle,
+                playlistDescription, 
+                setPlaylistDescription}}
+        >
             {props.children}
         </Context.Provider>
     )

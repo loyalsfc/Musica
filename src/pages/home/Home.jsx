@@ -1,26 +1,34 @@
 import Data from './Data'
 
-import SideNav from '../../components/sideNav/SideNav'
-import Player from '../../components/player/Player'
-
 import heartFull from '../../assets/icons/heart-white.svg'
 
 import vector from '../../assets/images/vector.svg'
 import heroImage from '../../assets/images/hero-img.png'
 
+import { Context } from '../../Context'
 import ChartCard from './Card'
 import Likes from './Likes'
 import ListContainer from './ListContainer'
 import MusicList from './MusicList'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 
 
 function Home(){
     const [musicData, setMusicData] = useState(Data.tracks.items)
     const [playList, setPlaylist] = useState(Data.playlists.items)
+    const {setPlaylistBG, setPlaylistTitle, setPlaylistDescription} = useContext(Context)
+
+    setPlaylistBG(false)
     //Array index numbers for top charts
     const randomThree = [4, 5, 9]
+
+    //Set playlist banner header, title and description
+    const setPlaylistParams = e =>{
+        setPlaylistBG(e.currentTarget.getAttribute("data-banner"))
+        setPlaylistTitle(e.currentTarget.getAttribute("data-title"))
+        setPlaylistDescription(e.currentTarget.getAttribute("data-description"))
+    }
 
     const options = {
         method: 'GET',
@@ -75,6 +83,8 @@ function Home(){
                 img = {data.images.items[0].sources[0].url}
                 title = {data.name} 
                 artist = {data.owner.name}
+                description = {data.description}
+                handleClick = {setPlaylistParams}
                 // length = {convertMilliseconds(data.duration.totalMilliseconds)}
             />)
         }
@@ -85,9 +95,9 @@ function Home(){
     return(
         
             <div className='w-full overflow-hidden'>
-                <section className='flex mb-10'>
-                    <div className='bg-[#609EAF] h-[373px] w-2/3 relative rounded-[40px] flex  text-white mr-6 overflow-hidden shadow-[0_15px_22px_-20px_rgba(122,144,150,1)]'>
-                        <img src={vector} className="absolute right-0 -"/>
+                <section className='flex flex-col md:flex-row mb-10'>
+                    <div className='bg-[#609EAF] h-[373px] md:w-2/3 relative rounded-[40px] flex  text-white mr-6 overflow-hidden shadow-[0_15px_22px_-20px_rgba(122,144,150,1)]'>
+                        <img src={vector} className="absolute right-0 "/>
                         <div className='h-full flex flex-col justify-between py-[38px] px-[45px] z-10'>
                             <span>Curated playlist</span>
 
