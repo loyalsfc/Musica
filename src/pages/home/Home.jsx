@@ -66,10 +66,12 @@ function Home(){
 
     //Pick three random music as top charts
     const topCharts = playList.map(({data}, index) => {
-        console.log(data)
         if(randomThree.includes(index)){
+            // Split the data uri to get the playlist id
+            const uri = data.uri.split(":") 
             return (<ChartCard
-                key = {data.id}
+                key = {uri[2]}
+                playlistId={uri[2]}
                 img = {data.images.items[0].sources[0].url}
                 title = {data.name} 
                 artist = {data.owner.name}
@@ -78,12 +80,10 @@ function Home(){
         }
     })
 
-    console.log(musicData)
+    // console.log(playList)
 
     return(
-        <main className="flex">
-            {/* <Player /> */}
-            <SideNav />
+        
             <div className='w-full overflow-hidden'>
                 <section className='flex mb-10'>
                     <div className='bg-[#609EAF] h-[373px] w-2/3 relative rounded-[40px] flex  text-white mr-6 overflow-hidden shadow-[0_15px_22px_-20px_rgba(122,144,150,1)]'>
@@ -143,7 +143,7 @@ function Home(){
                 </div>
                 
             </div>
-        </main>
+        // </main>
     )
 }
 

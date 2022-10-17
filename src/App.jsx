@@ -1,5 +1,8 @@
+import { Outlet } from 'react-router-dom'
+
 import { useState } from 'react'
 import Header from './components/Header/Header'
+import SideNav from './components/sideNav/SideNav'
 import Home from './pages/home/Home'
 import Playlist from './pages/playlist/Playlist'
 import Collection from './pages/collection/Collection'
@@ -16,13 +19,20 @@ function App() {
   }
 
   return (
-    <div className="bg-primary-dark" style={styles}>
+    <div className="bg-primary-dark" >
       <Player />
       <div className='container mx-auto'>
         <Header />
+        <main className="flex">
+            {/* <Player /> */}
+            <SideNav />
+            <Outlet />
+        </main>
+
+
         {/* <Home /> */}
         {/* <Playlist /> */}
-        <Collection />
+        {/* <Collection /> */}
       </div>
     </div>
   )

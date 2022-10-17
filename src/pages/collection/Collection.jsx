@@ -18,8 +18,7 @@ function Collection(){
     })
 
     return(
-        <main className="flex">
-            <SideNav />
+       
             <section className="w-full text-sm">
                 <button className="text-primary-dark bg-primary-yellow rounded-full py-2.5 px-4 mr-2.5">My Collection</button>
                 <button className="text-[#EFEEE0] border border-[#EFEEE0] rounded-full py-2.5 px-4 opacity-25">My Collection</button>
@@ -27,7 +26,7 @@ function Collection(){
                     {collections}
                 </div>
             </section>
-        </main>        
+               
     )
 }
 export default Collection

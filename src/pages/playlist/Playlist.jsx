@@ -1,4 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+
+import playlistTracks from '../../../tracks'
 
 import SideNav from "../../components/sideNav/SideNav"
 import MusicCard from "./Cards"
@@ -12,7 +15,9 @@ import collectionIcon from '../../assets/icons/music-square-add.svg'
 import heartIcon from '../../assets/icons/red-heart.svg'
 
 function Playlist(){
-    const [tracks, setMusicTracks] = useState(trackDetails.items)
+    const {playlistId} = useParams();
+
+    const [tracks, setTracks] = useState([])//trackDetails.items)
     const styles = {
         background: `linear-gradient(180deg, rgba(29, 33, 35, 0.8) 0%, #1D2123 61.48%), url(${leadImage})`,
         backgroundRepeat: 'no-repeat',
@@ -20,7 +25,30 @@ function Playlist(){
         backgroundPosition: 'center'
     }
 
-    let musicTracks = tracks.map((item, index) => {
+    //Get the playlist that matches the Id
+    const currentPlaylist = playlistTracks.playlist.filter(item => item.id == playlistId)
+    setTracks('currentPlaylist[0].items')
+
+    console.log(currentPlaylist[0].items)
+    console.log(tracks)
+
+    useEffect(()=>{
+        // const options = {
+        //     method: 'GET',
+        //     headers: {
+        //         'X-RapidAPI-Key': 'f28500c067msh18ae182692dc780p1c5676jsn17cbf229ab0e',
+        //         'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
+        //     }
+        // };
+        
+        // fetch(`https://spotify23.p.rapidapi.com/playlist_tracks/?id=${playlistId}&offset=0&limit=10`, options)
+        //     .then(response => response.json())
+        //     .then(response => console.log(response))
+        //     .catch(err => console.error(err));
+    }, [])
+
+    let musicTracks = currentPlaylist.map((item, index) => {
+        console.log(item)
         return(
             <MusicCard 
                 key={index}
@@ -29,15 +57,12 @@ function Playlist(){
                 musicCategory={item.track.album.album_type}
                 duration={item.track.duration_ms}
                 artist={item.track.artists[0].name}
-                // , favoriteIcon, musicCategory, duration
-            
+
             />
         )
     })
     return(
-        <main className="flex text-white">
-            <SideNav />
-            <section className="w-full">
+            <section className="w-full text-white">
                 <div className="flex items-end mb-12">
                     <img src={leadImage} width="288" alt="banner image" className="mr-7" />
                     <article>
@@ -61,7 +86,6 @@ function Playlist(){
                     {musicTracks}
                 </div>
             </section>
-        </main>
     )
 }
 
