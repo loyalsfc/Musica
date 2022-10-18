@@ -23,7 +23,7 @@ function App() {
   console.log(playlistBG)
 
   return (
-    <div className="bg-primary-dark bg-no-repeat bg-cover bg-center"  style={styles}>
+    <div className="px-6 lg:px-0 bg-primary-dark bg-no-repeat bg-cover bg-center"  style={styles}>
       <Player />
       <div className='container mx-auto'>
         <Header />

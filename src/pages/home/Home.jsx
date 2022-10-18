@@ -95,13 +95,13 @@ function Home(){
     return(
         
             <div className='w-full overflow-hidden'>
-                <section className='flex flex-col md:flex-row mb-10'>
-                    <div className='bg-[#609EAF] h-[373px] md:w-2/3 relative rounded-[40px] flex  text-white mr-6 overflow-hidden shadow-[0_15px_22px_-20px_rgba(122,144,150,1)]'>
-                        <img src={vector} className="absolute right-0 "/>
-                        <div className='h-full flex flex-col justify-between py-[38px] px-[45px] z-10'>
-                            <span>Curated playlist</span>
+                <section className='flex flex-col lg:flex-row mb-10'>
+                    <div className='bg-[#609EAF] h-[70vh] lg:h-[373px] lg:w-2/3 relative rounded-[40px] flex  text-white lg:mr-6 overflow-hidden shadow-[0_15px_22px_-20px_rgba(122,144,150,1)]'>
+                        <img src={vector} className="absolute -right-36 -top-20 lg:right-0 lg:top-0 rotate-90 lg:rotate-0"/>
+                        <div className='h-full flex flex-col lg:justify-between py-[38px] px-8 lg:px-[45px] z-10'>
+                            <span className='mb-auto lg:mb-0'>Curated playlist</span>
 
-                            <article className=''>
+                            <article className='mb-11'>
                                 <h2 className='text-4xl font-bold leading-[120%]'>R & B Hits</h2>
                                 <p className='w-full max-w-[17.25rem] text-sm leading-[120%]'>All mine, Lie again, Petty call me everyday, Out of time, No love, Bad habit, and so much more</p>
                             </article>
@@ -128,15 +128,17 @@ function Home(){
                                         mr="-ml-2"
                                     />
                                 </div>
-                                <img src={heartFull} className="h-4 w-4 ml-3 mr-2" />
-                                <span className='text-sm'>33k likes</span>
+                                <img src={heartFull} className="h-6 w-6 lg:h-4 lg:w-4 ml-3 mr-2" />
+                                <span className='text-2xl lg:text-sm'>33k likes</span>
                             </div>
                         </div>
-                        <img src={heroImage} alt="hero-image"  className='z-10 ml-auto'/>
+                        <img src={heroImage} alt="hero-image"  className='z-10 ml-auto hidden lg:block'/>
                     </div>
-                    <div className='w-1/3'>
+                    <div className='w-full lg:w-1/3 mt-[47px] lg:mt-0'>
                         <h2 className='text-white text-2xl font-bold mb-3.5'>Top Charts</h2>
-                        {topCharts}
+                        <div className='flex flex-nowrap flex-row lg:flex-col overflow-x-scroll'>
+                            {topCharts}
+                        </div>
                     </div> 
                 </section>
                 <div>

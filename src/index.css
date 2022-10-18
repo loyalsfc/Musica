@@ -32,9 +32,9 @@
 .collection-container:hover > img {
   transform: scale(1.2);
 }
-.likes{
+/* .likes{
   display: none;
-}
+} */
 
 .collection-container:hover .likes {
   display: block;

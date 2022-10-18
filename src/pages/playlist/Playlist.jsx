@@ -5,7 +5,6 @@ import { Context } from "../../Context"
 
 import playlistTracks from '../../../tracks'
 
-import SideNav from "../../components/sideNav/SideNav"
 import MusicCard from "./Cards"
 import trackDetails from "./Tracks"
 
@@ -59,23 +58,23 @@ function Playlist(){
     })
     return(
             <section className="w-full text-white">
-                <div className="flex items-end mb-12">
-                    <img src={playlistBG} width="288" alt="banner image" className="mr-7 rounded-[35px]" />
+                <div className="flex lg:items-end flex-col lg:flex-row mb-6 lg:mb-12">
+                    <img src={playlistBG} alt="banner image" className="mb-6 lg:mb-0 lg:mr-7 w-full lg:w-[18rem] rounded-[35px]" />
                     <article>
                         <h4 className="text-4xl font-bold mb-2 text-[#A4C7C6]">{playlistTitle}</h4>
                         <p className="text-sm text-[#EFEEE0] mb-2.5 max-w-[33rem]">{playlistDescription}</p>
                         <p className="text-sm text-[#EFEEE0]">10 songs ~ 1hr+</p>
-                        <div className="flex mt-10">
-                        <button className="buttons-play">
-                            <img src={playIcon} className="mr-3" /> Play all
-                        </button>
-                        <button className="buttons-play">
-                            <img src={collectionIcon} className="mr-3" /> Add to collection
-                        </button>
-                        <button className="buttons-play">
-                            <img src={heartIcon} />
-                        </button>
-                    </div>
+                        <div className="flex mt-6 lg:mt-10">
+                            <button className="buttons-play">
+                                <img src={playIcon} className="mr-3" /> Play all
+                            </button>
+                            <button className="buttons-play">
+                                <img src={collectionIcon} className="mr-3" /> Add to collection
+                            </button>
+                            <button className="buttons-play">
+                                <img src={heartIcon} />
+                            </button>
+                        </div>
                     </article>
                 </div>
                 <div>
@@ -86,5 +85,3 @@ function Playlist(){
 }
 
 export default Playlist
-
-// background: linear-gradient(180deg, rgba(29, 33, 35, 0.8) 0%, #1D2123 61.48%), url(Indieground's Weekly Inspiration Dose #96.jpg);

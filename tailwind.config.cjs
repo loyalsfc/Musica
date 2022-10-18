@@ -13,6 +13,9 @@ module.exports = {
         'secondary-grey': 'rgba(255, 255, 255, 0.5)',
         'primary-yellow': '#FACD66',
       },
+      dropShadow: {
+        '3xl': '-3.4px 0px 3.4px rgba(0, 0, 0, 0.38)',
+      }
     },
   },
   plugins: [

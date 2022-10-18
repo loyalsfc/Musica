@@ -1,21 +1,8 @@
-import { useContext } from 'react'
-import { Context } from '../../Context'
+import { Link } from "react-router-dom"
 
-import logo from '../../assets/icons/logo.svg'
-import homeIcon from '../../assets/icons/home.svg'
-import playlistIcon from '../../assets/icons/playlist.svg'
-import radioIcon from '../../assets/icons/radio.svg'
-import videoIcon from '../../assets/icons/videos.svg'
-import profileIcon from '../../assets/icons/profile.svg'
-import logoutIcon from '../../assets/icons/logout.svg'
-import { Link } from 'react-router-dom'
-
-function SideNav(){
-    const {setPlaylistBG} = useContext(Context)
-
+function NavItems(){
     return(
-        <aside className='mr-6 hidden lg:block'>
-            <div className='bg-dark-alt rounded-[2rem] px-4 py-7 mb-5'>
+            <>
                 <Link to="/">
                     <svg width="22" height="22" onClick={()=>setPlaylistBG(false)} className='mb-8 transition-all hover:scale-125' viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g opacity="1">
@@ -47,14 +34,8 @@ function SideNav(){
                     <path d="M10.3125 16.3717H7.07666V20.1667H10.3125V16.3717Z" fill="#EFEEE0" fill-opacity="0.25"/>
                     <path d="M1.99835 16.3717C2.42919 18.3333 3.73085 19.6167 5.70169 20.02V16.3717H1.99835Z" fill="#EFEEE0" fill-opacity="0.25"/>
                 </svg>
-
-            </div>
-            <div className='bg-dark-alt rounded-[2rem] px-4 py-7'>
-                <img src={profileIcon} className="pb-8 transition-all hover:scale-125"/>
-                <img src={logoutIcon} className="transition-all hover:scale-125"/>
-            </div>
-        </aside>
+            </>
     )
 }
 
-export default SideNav
+export default NavItems
