@@ -3,15 +3,14 @@ import { Context } from "../../Context"
 
 
 function MusicList ({img, title, artist, url}){
-    const {setPlayerSrc, audioPlayer, setPlayerDetail} = useContext(Context)
-    const handleClick = () => {
-        setPlayerDetail({cover: img, title: title, duration: "", artist: artist})
+    const {setPlayerSrc, togglePlay, setPlayerDetail, audioPlayer, pausePlay, continuePlay} = useContext(Context)
 
-        // audioPlayer.pause()
+    // set current music to play
+    const handleClick = () => {
         setPlayerSrc(url)
-        console.log(audioPlayer)
-        audioPlayer.play();
-        // audioPlayer.play();
+        setPlayerDetail({cover: img, title: title, duration: "", artist: artist})
+        setTimeout(()=>{togglePlay(); console.log('o ti loor')}, 100)
+        // togglePlay()
     }
 
     return(

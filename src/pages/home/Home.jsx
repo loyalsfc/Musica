@@ -1,5 +1,6 @@
 import Data from './Data'
 import topMusic from './TopMusic'
+import PlaylistMusic from './PlaylistMusic'
 
 import heartFull from '../../assets/icons/heart-white.svg'
 
@@ -16,50 +17,12 @@ import { useEffect, useState, useContext } from 'react'
 
 
 function Home(){
-    const [musicData, setMusicData] = useState(topMusic)
-    const [playList, setPlaylist] = useState(Data.playlists.items)
-    const {setPlaylistBG, setPlaylistTitle, setPlaylistDescription} = useContext(Context)
+    const {setPlaylistBG, millisecondsToMinute} = useContext(Context)
 
     // setPlaylistBG(false)
-    //Array index numbers for top charts
-    const randomThree = [4, 5, 9]
 
-    //Set playlist banner header, title and description
-    const setPlaylistParams = e =>{
-        setPlaylistBG(e.currentTarget.getAttribute("data-banner"))
-        setPlaylistTitle(e.currentTarget.getAttribute("data-title"))
-        setPlaylistDescription(e.currentTarget.getAttribute("data-description"))
-    }
-
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': 'f28500c067msh18ae182692dc780p1c5676jsn17cbf229ab0e',
-            'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
-        }
-    };
-
-    useEffect(() => {  
-        // const options = {
-        //     method: 'GET',
-        //     headers: {
-        //         'X-RapidAPI-Key': 'f28500c067msh18ae182692dc780p1c5676jsn17cbf229ab0e',
-        //         'X-RapidAPI-Host': 'shazam-core.p.rapidapi.com'
-        //     }
-        // };
-        
-        // fetch('https://shazam-core.p.rapidapi.com/v1/charts/country?country_code=NG', options)
-        //     .then(response => response.json())
-        //     .then(response => console.log(response))
-        //     .catch(err => console.error(err));
-        // fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=37i9dQZF1EQpj7X7UK8OOF&offset=0&limit=10', options)
-        // .then(response => response.json())
-        // .then(response => console.log(response))
-        // .catch(err => console.error(err));
-    }, [])
-
-    //Map through the musicData and display them
-    const newRelease = musicData.map((track, index) => {
+    //Map through the TopMusic and display them
+    const newRelease = topMusic.map((track, index) => {
         if(index < 10){
             return (
                 <MusicList 
@@ -73,7 +36,7 @@ function Home(){
         }
     })
 
-    const popular = musicData.map((track, index) => {
+    const popular = topMusic.map((track, index) => {
         if(index >= 10 && index <= 20){
             return (
                 <MusicList 
@@ -88,31 +51,25 @@ function Home(){
     })
 
     //Pick three random music as top charts
-    const topCharts = playList.map(({data}, index) => {
-        if(randomThree.includes(index)){
-            // Split the data uri to get the playlist id
-            const uri = data.uri.split(":") 
+    console.log
+    const topCharts = PlaylistMusic.map(data => {
             return (<ChartCard
-                key = {uri[2]}
-                playlistId={uri[2]}
-                img = {data.images.items[0].sources[0].url}
+                key = {data.id}
+                playlistId={data.id}
+                img = {data.images  }
                 title = {data.name} 
-                artist = {data.owner.name}
+                artist = {data.owner}
                 description = {data.description}
-                handleClick = {setPlaylistParams}
-                // length = {convertMilliseconds(data.duration.totalMilliseconds)}
+                length = {millisecondsToMinute(data.timestamp)}
             />)
-        }
     })
-
-    // console.log(playList)
 
     return(
         
-            <div className='w-full overflow-hidden pb-32'>
+            <div className='w-full overflow-hidden pb-20'>
                 <section className='flex flex-col lg:flex-row mb-10'>
                     <div className='bg-[#609EAF] h-[70vh] lg:h-[373px] lg:w-2/3 relative rounded-[40px] flex  text-white lg:mr-6 overflow-hidden shadow-[0_15px_22px_-20px_rgba(122,144,150,1)]'>
-                        <img src={vector} className="absolute -right-36 -top-20 lg:right-0 lg:top-0 rotate-90 lg:rotate-0"/>
+                        <img src={vector} className="absolute -right-36 -top-20 md:right-0 md:top-0 rotate-90 md:rotate-0"/>
                         <div className='h-full flex flex-col lg:justify-between py-[38px] px-8 lg:px-[45px] z-10'>
                             <span className='mb-auto lg:mb-0'>Curated playlist</span>
 
@@ -147,7 +104,7 @@ function Home(){
                                 <span className='text-xl lg:text-sm'>33k likes</span>
                             </div>
                         </div>
-                        <img src={heroImage} alt="hero-image"  className='z-10 ml-auto hidden lg:block'/>
+                        <img src={heroImage} alt="hero-image"  className='z-10 ml-auto hidden md:block'/>
                     </div>
                     <div className='w-full lg:w-1/3 mt-[47px] lg:mt-0'>
                         <h2 className='text-white text-2xl font-bold mb-3.5'>Top Charts</h2>

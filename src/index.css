@@ -39,3 +39,12 @@
 .collection-container:hover .likes {
   display: block;
 }
+
+.volume-slider {
+  -webkit-appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+}

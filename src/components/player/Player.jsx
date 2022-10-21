@@ -10,41 +10,21 @@ import { useState, useContext } from 'react'
 import { Context } from '../../Context'
 
 function Player(){
-    const {playerSrc, audioPlayer, playerDetail} = useContext(Context)
+    const {playerSrc, audioPlayer, playerDetail, togglePlay} = useContext(Context)
     const [isPlaying, setIsPlaying] = useState(false)
     // console.log(audioPlayer)
-    function togglePlay(){
-        //Check if audio is paused and play
-        // if(audioPlayer.paused && audioPlayer.currentTime > 0 && !audioPlayer.ended) {
-        //     audioPlayer.play();
-        //  } else {
-        //     audioPlayer.pause();
-        //  }
 
-        if(!isPlaying){
-            audioPlayer.play()
-            setIsPlaying(true)
-        } else {
-            audioPlayer.pause()
-            setIsPlaying(false)
-        }
-        console.log('key pressed')
-            console.log(audioPlayer.duration)
-    } 
+    // console.log(audioPlayer)
 
-    // console.log(audioPlayer.duration)
-
-    function setSrc(url){
-        audioPlayer.src = url;
-        audioPlayer.play();
-        setIsPlaying(true);
+    const handleClick = (e) => {
+        console.log(e)
     }
 
     return(
         <div className="fixed bottom-0 bg-[rgba(29,33,35,0.3)] border-t border-white/[0.1] backdrop-blur-lg py-0 lg:py-4 w-full pl-6 -ml-6 lg:ml-0 z-50">
             <audio id='audio-player' src={playerSrc}></audio>
             <div className='container mx-auto flex items-center justify-between'>
-                <div className='flex items-center'>
+                <div className='flex items-center w-1/5'>
                     <img src={playerDetail.cover} className="rounded-2xl h-12 w-12 mr-3 font-bold"/>
                     <div className='text-white truncate'>
                         <p className='text-sm '>{playerDetail.title}</p>
@@ -86,8 +66,9 @@ function Player(){
                 </div>
                 <div className='hidden md:flex items-center w-1/5'>
                     <img src={soundIcon}  className="mr-2"/>
-                    <div className='h-1 bg-white/[0.04] w-full rounded'>
+                    <div className='h-1 bg-white/[0.04] w-full rounded hover:cursor-pointer' onClick={handleClick}>
                         <div className='w-1/2 bg-primary-yellow h-full rounded'></div>
+                        {/* <input type="range" className='volume-slider h-1 w-full bg-primary-yellow rounded-full' /> */}
                     </div>
                 </div>
             </div>
