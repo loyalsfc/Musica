@@ -51,7 +51,6 @@ function Home(){
     })
 
     //Pick three random music as top charts
-    console.log
     const topCharts = PlaylistMusic.map(data => {
             return (<ChartCard
                 key = {data.id}

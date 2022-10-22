@@ -2,11 +2,11 @@ import heart from '../../assets/icons/outline-heart.svg'
 import {Context} from '../../Context'
 import { useContext } from 'react'
 
-function MusicCard({img, title, musicCategory, duration, artist}){
+function MusicCard({img, title, musicCategory, duration, artist, handleClick, index}){
     const {millisecondsToMinute} = useContext(Context)
 
     return (
-        <div className="flex items-center  backdrop-blur-sm bg-[rgb(51,55,59,0.37)] rounded-[15px] py-2 px-2.5 lg:pr-8  text-xs mb-2.5">
+        <div data-id={index} className="flex items-center cursor-pointer   backdrop-blur-sm bg-[rgb(51,55,59,0.37)] rounded-[15px] py-2 px-2.5 lg:pr-8  text-xs mb-2.5" onClick={handleClick}>
             <div className='flex lg:items-center w-4/5'>
                 <img src={img} alt="Banner image" width='39' className="rounded-lg mr-5"/> 
                 <img src={heart} alt="heart image" className="mr-[79px] hidden lg:block"/>

@@ -13,7 +13,7 @@ import heartIcon from '../../assets/icons/red-heart.svg'
 
 function Playlist(){
     const {playlistId} = useParams();
-    const {setPlaylistBG, playlistTitle, playlistDescription} = useContext(Context)
+    const {setPlaylistBG, continuePlay, setPlayerSrc, setPlayerDetail, audioPlayer} = useContext(Context)
 
 
     const [tracks, setTracks] = useState([])
@@ -30,21 +30,48 @@ function Playlist(){
     //Set the background for the playlist
     setPlaylistBG(currentPlaylist.images)
 
-    let musicTracks = tracks.map(item => {
+    //Function for playing playlist item
+    function handleClick(e){
+        let index = e.currentTarget.getAttribute('data-id') 
+        const {hub, images, title, subtitle} = tracks[index]
+        const url = hub.actions[1].uri
+        setPlayerSrc(url)
+        setPlayerDetail({cover: images.coverart, title: title, duration: "", artist: subtitle})
+        audioPlayer.onloadedmetadata = () => {
+            continuePlay();    
+        }
+    }
+
+    console.log(audioPlayer)
+
+    audioPlayer.onended = () => {
+        let index = 7
+        const {hub, images, title, subtitle} = tracks[index]
+        const url = hub.actions[1].uri
+        setPlayerSrc(url)
+        setPlayerDetail({cover: images.coverart, title: title, duration: "", artist: subtitle})
+        setTimeout(()=>{continuePlay(); console.log('o ti loor')}, 100)
+    }
+
+    let musicTracks = tracks.map((item, index) => {
         return(
             <MusicCard 
                 key={item.key}
+                index={index}
                 img = {item.images.coverart}
                 title={item.title}
                 musicCategory={'Single'}
                 duration={'0:30'}
                 artist={item.subtitle}
-
+                handleClick={handleClick}
             />
         )
     })
+
+    console.log(tracks)
+
     return(
-            <section className="w-full text-white">
+            <section className="w-full text-white pb-20">
                 <div className="flex lg:items-end flex-col lg:flex-row mb-6 lg:mb-12">
                     <img src={currentPlaylist.images} alt="banner image" className="mb-6 lg:mb-0 lg:mr-7 w-full lg:w-[18rem] rounded-[35px]" />
                     <article>
