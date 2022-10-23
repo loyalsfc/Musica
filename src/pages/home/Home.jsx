@@ -1,4 +1,3 @@
-import Data from './Data'
 import topMusic from './TopMusic'
 import PlaylistMusic from './PlaylistMusic'
 
@@ -17,9 +16,9 @@ import { useEffect, useState, useContext } from 'react'
 
 
 function Home(){
-    const {setPlaylistBG, millisecondsToMinute} = useContext(Context)
+    const {setPlaylistBG, millisecondsToMinute} = useContext(Context);
 
-    // setPlaylistBG(false)
+    setPlaylistBG(false)
 
     //Map through the TopMusic and display them
     const newRelease = topMusic.map((track, index) => {
@@ -27,6 +26,7 @@ function Home(){
             return (
                 <MusicList 
                     key={track.key}
+                    index = {index}
                     img={track.share.image}
                     title = {track.title} 
                     artist = {track.subtitle} 
@@ -41,6 +41,7 @@ function Home(){
             return (
                 <MusicList 
                     key={track.key}
+                    index = {index}
                     img={track.share.image}
                     title = {track.title} 
                     artist = {track.subtitle}

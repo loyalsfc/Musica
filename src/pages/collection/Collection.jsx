@@ -1,18 +1,17 @@
-import Data from '../home/Data'
-
-import SideNav from "../../components/sideNav/SideNav"
+import topMusic from '../home/TopMusic'
 
 import CollectionCard from './CollectionCard'
 
 function Collection(){
 
-    const collections = Data.tracks.items.map(({data}, index) => {
+    const collections = topMusic.map((track, index) => {
         return(
             <CollectionCard
-                key={index}
-                title = {data.albumOfTrack.name} 
-                artist = {data.artists.items[0].profile.name}
-                trackImg={data.albumOfTrack.coverArt.sources[2].url}
+                key={track.key}
+                title = {track.title} 
+                artist = {track.subtitle}
+                trackImg={track.share.image}
+                url = {track.hub.actions[1].uri}
             />
         )
     })

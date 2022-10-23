@@ -5,7 +5,7 @@ import heart from '../../assets/icons/heart.svg'
 function ChartCard({playlistId, img, title, artist, length, handleClick}){
     return (
         <Link to={`/playlist/${playlistId}`} className="shrink-0 mr-4 w-3/4 lg:w-full">
-            <div className="p-4 bg-dark-alt flex flex-col lg:flex-row lg:items-center rounded-3xl mb-3 relative" 
+            <div className="p-4 bg-dark-alt flex flex-col lg:flex-row  rounded-3xl mb-3 relative" 
                 onClick={handleClick}
             >
                 <img src={img} className='w-[6.75rem] lg:h-[16] lg:w-16 rounded-xl mr-3 mb-4 lg:mb-0' alt="music image" />

@@ -6,6 +6,9 @@
   .buttons-play {
     @apply rounded-full bg-white/[0.07] p-3 text-xs flex mr-2 backdrop-blur-sm
   }
+  .play-icon{
+    @apply transition-all hover:cursor-pointer hover:scale-110
+  }
 }
 
 * {

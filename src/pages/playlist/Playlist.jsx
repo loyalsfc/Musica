@@ -13,7 +13,7 @@ import heartIcon from '../../assets/icons/red-heart.svg'
 
 function Playlist(){
     const {playlistId} = useParams();
-    const {setPlaylistBG, continuePlay, setPlayerSrc, setPlayerDetail, audioPlayer} = useContext(Context)
+    const {setPlaylistBG, setTrackIndex, setCurrentTrack, setTracksQueue} = useContext(Context)
 
 
     const [tracks, setTracks] = useState([])
@@ -32,25 +32,10 @@ function Playlist(){
 
     //Function for playing playlist item
     function handleClick(e){
-        let index = e.currentTarget.getAttribute('data-id') 
-        const {hub, images, title, subtitle} = tracks[index]
-        const url = hub.actions[1].uri
-        setPlayerSrc(url)
-        setPlayerDetail({cover: images.coverart, title: title, duration: "", artist: subtitle})
-        audioPlayer.onloadedmetadata = () => {
-            continuePlay();    
-        }
-    }
-
-    console.log(audioPlayer)
-
-    audioPlayer.onended = () => {
-        let index = 7
-        const {hub, images, title, subtitle} = tracks[index]
-        const url = hub.actions[1].uri
-        setPlayerSrc(url)
-        setPlayerDetail({cover: images.coverart, title: title, duration: "", artist: subtitle})
-        setTimeout(()=>{continuePlay(); console.log('o ti loor')}, 100)
+        setTracksQueue(tracks)
+        let index = e.currentTarget.getAttribute('data-id')
+        setTrackIndex(parseInt(index))
+        setCurrentTrack(index);
     }
 
     let musicTracks = tracks.map((item, index) => {
@@ -67,8 +52,6 @@ function Playlist(){
             />
         )
     })
-
-    console.log(tracks)
 
     return(
             <section className="w-full text-white pb-20">
