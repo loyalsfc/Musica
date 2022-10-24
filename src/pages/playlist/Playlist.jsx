@@ -4,9 +4,7 @@ import { useParams } from "react-router-dom"
 import { Context } from "../../Context"
 
 import playlistTracks from '../home/PlaylistMusic'
-
 import MusicCard from "./Cards"
-
 import playIcon from  '../../assets/icons/play-new.svg'
 import collectionIcon from '../../assets/icons/music-square-add.svg'
 import heartIcon from '../../assets/icons/red-heart.svg'

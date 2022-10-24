@@ -12,7 +12,7 @@ import Likes from './Likes'
 import ListContainer from './ListContainer'
 import MusicList from './MusicList'
 
-import { useEffect, useState, useContext } from 'react'
+import { useContext } from 'react'
 
 
 function Home(){

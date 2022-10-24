@@ -1,9 +1,6 @@
-import NavItems from "../sideNav/NavItems"
-
 import profileIcon from '../../assets/icons/profile.svg'
 import logoutIcon from '../../assets/icons/logout.svg'
 import { Link } from 'react-router-dom'
-import { useRef } from "react"
 
 function SlideMenu({handleClick}){
     

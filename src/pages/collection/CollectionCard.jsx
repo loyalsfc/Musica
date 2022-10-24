@@ -1,5 +1,3 @@
-import playIcon from  '../../assets/icons/play-new.svg'
-
 
 function CollectionCard({title, artist, trackImg}){
     return(

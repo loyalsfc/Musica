@@ -3,7 +3,7 @@ import { Context } from "../../Context"
 import TopMusic from "./TopMusic"
 
 function MusicList ({img, title, artist, url, index}){
-    const {setPlayerSrc, setTrackIndex, setCurrentTrack, setTracksQueue} = useContext(Context)
+    const {setTrackIndex, setCurrentTrack, setTracksQueue} = useContext(Context)
 
     // set current music to play
     const handleClick = (e) => {
