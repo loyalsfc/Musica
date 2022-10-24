@@ -9,7 +9,7 @@ function Header(){
     const mobileSearch = document.querySelector('.mobile-search');
     //Toggle hide/show mobile menu
     const toggleMobileMenu = () => {
-        document.querySelector('.navMenuSlideDown').classList.toggle('-top-full')
+        document.querySelector('.navMenuSlideDown').classList.toggle('-left-full')
         document.querySelector('.navMenuSlideDown').classList.toggle('top-0')
     }
 
@@ -40,7 +40,7 @@ function Header(){
             }
         }
 
-        //
+        //Assign the index as current track
         setTrackIndex(parseInt(currentIndex))
         setCurrentTrack(currentIndex);
         setSearch('')
@@ -93,27 +93,28 @@ function Header(){
                 </button>
                 <img src={logo} height={34} alt="logo" className='mr-[35px]' />
                 <nav className='flex items-center justify-end  w-full'>
-                <svg onClick={showMobileSearch} width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13.75 23.75C19.2728 23.75 23.75 19.2728 23.75 13.75C23.75 8.22715 19.2728 3.75 13.75 3.75C8.22715 3.75 3.75 8.22715 3.75 13.75C3.75 19.2728 8.22715 23.75 13.75 23.75Z" stroke="white" strokeOpacity="0.25" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M26.25 26.25L20.8125 20.8125" stroke="white" strokeOpacity="0.25" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <input 
-                    type="search" 
-                    onChange={onInput} 
-                    className="hidden lg:block ml-5 bg-transparent placeholder:text-primary-grey focus:outline-0 block w-full" 
-                    placeholder='Search artist'
-                    value={search}
-                />
-                <div className='lg:hidden mobile-search scale-0 transition-all absolute bg-dark-alt w-full left-0 h-16 top-0 flex'>
-                <input 
-                    type="search" 
-                    ref={searchRef}
-                    onChange={onInput} 
-                    className="ml-5 bg-transparent placeholder:text-primary-grey focus:outline-0 block w-full" 
-                    placeholder='Search artist'
-                    value={search}
-                />
-                </div>
+                    <svg onClick={showMobileSearch} width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.75 23.75C19.2728 23.75 23.75 19.2728 23.75 13.75C23.75 8.22715 19.2728 3.75 13.75 3.75C8.22715 3.75 3.75 8.22715 3.75 13.75C3.75 19.2728 8.22715 23.75 13.75 23.75Z" stroke="white" strokeOpacity="0.25" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M26.25 26.25L20.8125 20.8125" stroke="white" strokeOpacity="0.25" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <input 
+                        type="search" 
+                        onChange={onInput} 
+                        className="hidden lg:block ml-5 bg-transparent placeholder:text-primary-grey focus:outline-0 block w-full" 
+                        placeholder='Search artist'
+                        value={search}
+                    />
+                    <div className='lg:hidden mobile-search scale-0 transition-all absolute bg-dark-alt w-full left-0 h-16 top-0 flex'>
+                        <input 
+                            type="text" 
+                            ref={searchRef}
+                            onChange={onInput} 
+                            className="ml-5 bg-transparent placeholder:text-primary-grey focus:outline-0 block w-full" 
+                            placeholder='Search artist'
+                            value={search}
+                        />
+                        <button onClick={()=> mobileSearch.classList.add('scale-0')} className="absolute text-white top-4 right-1"><i className="fa-solid fa-xmark"></i></button>
+                    </div>
                 </nav>
                 <SlideMenu handleClick={handleClick}/>
             </div>

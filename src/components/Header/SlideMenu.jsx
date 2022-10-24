@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 function SlideMenu({handleClick}){
     
     return(
-        <nav className="-top-full navMenuSlideDown transition-all w-full h-full fixed end-0 bg-dark-alt z-50 p-10 pt-[7rem] -ml-6 lg:hidden">
+        <nav className="-left-full navMenuSlideDown transition-all w-full h-full fixed end-0 bg-dark-alt z-50 p-10 pt-[7rem] -ml-6 lg:hidden">
             <button onClick={handleClick} className="absolute text-white top-4 right-4 text-2xl"><i className="fa-solid fa-xmark"></i></button>
             {/* <div> */}
                 <Link to="/">
