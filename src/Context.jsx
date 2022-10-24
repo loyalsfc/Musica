@@ -11,8 +11,8 @@ function ContextProvider(props){
     const [musicDuration, setMusicDuration] = useState('')
     const [currentTime, setCurrentTime] = useState(0)
     const [tracksQueue, setTracksQueue] = useState(TopMusic)
-    const [trackIndex, setTrackIndex] = useState(0)
-    const [isShuffle, setIsShuffle] = useState(false)
+    const [trackIndex, setTrackIndex] = useState(22)
+    const [isShuffle, setIsShuffle] = useState(false)   
     const [search, setSearch] = useState('')
     
     useEffect(() => {
@@ -105,6 +105,15 @@ function ContextProvider(props){
         })
     }
 
+    //Function for playing playlist item
+    function playTrack(e, tracksarray){
+        setTracksQueue(tracksarray)
+        let index = e.currentTarget.getAttribute('data-id')
+        setTrackIndex(parseInt(index))
+        setCurrentTrack(index);
+        // continuePlay()
+    }
+
     return(
         <Context.Provider 
             value={{millisecondsToMinute, 
@@ -128,7 +137,8 @@ function ContextProvider(props){
                 search, 
                 setSearch,
                 searchFilter,
-                tracksQueue
+                tracksQueue,
+                playTrack
             }}
         >
             {props.children}

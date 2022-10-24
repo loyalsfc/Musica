@@ -11,7 +11,7 @@ import heartIcon from '../../assets/icons/red-heart.svg'
 
 function Playlist(){
     const {playlistId} = useParams();
-    const {setPlaylistBG, setTrackIndex, setCurrentTrack, setTracksQueue} = useContext(Context)
+    const {setPlaylistBG, playTrack} = useContext(Context)
 
 
     const [tracks, setTracks] = useState([])
@@ -30,10 +30,7 @@ function Playlist(){
 
     //Function for playing playlist item
     function handleClick(e){
-        setTracksQueue(tracks)
-        let index = e.currentTarget.getAttribute('data-id')
-        setTrackIndex(parseInt(index))
-        setCurrentTrack(index);
+        playTrack(e, tracks)
     }
 
     let musicTracks = tracks.map((item, index) => {

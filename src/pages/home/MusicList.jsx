@@ -3,14 +3,11 @@ import { Context } from "../../Context"
 import TopMusic from "./TopMusic"
 
 function MusicList ({img, title, artist, url, index}){
-    const {setTrackIndex, setCurrentTrack, setTracksQueue} = useContext(Context)
+    const {playTrack} = useContext(Context)
 
     // set current music to play
     const handleClick = (e) => {
-        setTracksQueue(TopMusic)
-        const index = e.currentTarget.getAttribute('data-id')
-        setTrackIndex(parseInt(index))
-        setCurrentTrack(index)
+        playTrack(e, TopMusic)
     }   
 
     return(
