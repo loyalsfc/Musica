@@ -46,7 +46,7 @@ function Playlist(){
                 img = {item.images.coverart}
                 title={item.title}
                 musicCategory={'Single'}
-                duration={'0:30'}
+                duration={233000}
                 artist={item.subtitle}
                 handleClick={handleClick}
             />

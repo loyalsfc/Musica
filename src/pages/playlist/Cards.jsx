@@ -16,7 +16,7 @@ function MusicCard({img, title, musicCategory, duration, artist, handleClick, in
                 </div>
             </div>
             <div className='flex flex-col-reverse lg:flex-row w-1/5 items-end lg:item-center  justify-between'>
-                <p  className=''>{duration}</p>
+                <p  className=''>{millisecondsToMinute(duration)}</p>
                 <i className="fa-solid fa-ellipsis-vertical text-primary-yellow text-base"></i>
             </div>
         </div>

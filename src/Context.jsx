@@ -13,11 +13,17 @@ function ContextProvider(props){
     const [tracksQueue, setTracksQueue] = useState(TopMusic)
     const [trackIndex, setTrackIndex] = useState(0)
     const [isShuffle, setIsShuffle] = useState(false)
+    const [search, setSearch] = useState('')
     
     useEffect(() => {
         // set the audioplayer globally
         setAudioPlayer(document.querySelector('#audio-player'))   
     },[])
+
+    //Filter item list by search
+    const searchFilter = tracksQueue.filter(item => 
+        item.title.toLowerCase().includes(search.toLowerCase()) || item.subtitle.toLowerCase().includes(search.toLowerCase()))
+
 
     // Play track with corresponding Index
     useEffect(() => {
@@ -119,6 +125,10 @@ function ContextProvider(props){
                 setIsShuffle,
                 currentTime,
                 musicDuration,
+                search, 
+                setSearch,
+                searchFilter,
+                tracksQueue
             }}
         >
             {props.children}
