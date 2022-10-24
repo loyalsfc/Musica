@@ -1,15 +1,30 @@
 import logo from '../../assets/icons/logo.svg'
 import SlideMenu from './SlideMenu'
+import { Context } from '../../Context'
+import { useContext } from 'react'
 
 function Header(){
-    const handleClick = () => {
+    const {setPlaylistBG} = useContext(Context)
+
+    const toggleMobileMenu = () => {
         document.querySelector('.navMenuSlideDown').classList.toggle('-top-full')
         document.querySelector('.navMenuSlideDown').classList.toggle('top-0')
     }
 
+    const handleClick = (e) => {
+        toggleMobileMenu()
+        setPlaylistBG(false)
+        document.querySelectorAll('.nav-link').forEach(item => {
+            console.log(item)
+            item.classList.remove('active')
+        })
+        e.currentTarget.classList.add('active')
+    }
+
+
     return(
         <header className='py-6 flex items-center text-primary-grey overflow-auto'>
-            <button className='text-2xl text-white mr-5 lg:hidden ' onClick={handleClick}>
+            <button className='text-2xl text-white mr-5 lg:hidden ' onClick={toggleMobileMenu}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_2330_441)">
                         <path d="M4 8H20" stroke="#EFEEE0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

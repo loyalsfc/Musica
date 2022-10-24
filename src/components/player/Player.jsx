@@ -1,10 +1,6 @@
-// import banner from '../../assets/images/rectangle-26.png'
 
-// import playIcon from '../../assets/icons/play.svg'
 import nextIcon from '../../assets/icons/next.svg'
 import previous from '../../assets/icons/previous.svg'
-// import repeatIcon from '../../assets/icons/repeate-one.svg'
-// import shuffle from '../../assets/icons/shuffle.svg'
 import soundIcon from '../../assets/icons/sound.svg'
 import { useState, useContext, useEffect } from 'react'
 import { Context } from '../../Context'
@@ -50,18 +46,18 @@ function Player(){
     }
 
     return(
-        <div className="fixed bottom-0 bg-[rgba(29,33,35,0.3)] border-t border-white/[0.1] backdrop-blur-lg py-0 lg:py-6 w-full pl-6 -ml-6 lg:ml-0 z-50">
+        <div className="fixed bottom-0 bg-[rgba(29,33,35,0.3)] border-t border-white/[0.1] backdrop-blur-lg py-4 lg:py-6 w-full pl-6 -ml-6 lg:ml-0 z-50">
             <audio id='audio-player' src={playerSrc}></audio>
             <div className='container mx-auto flex items-center justify-between'>
-                <div className='flex items-center w-1/5 grow-0'>
-                    <img src={playerDetail.cover} className="rounded-2xl h-12 w-12 mr-3 font-bold"/>
+                <div className='flex items-center w-3/5 md:w-1/5 grow-0'>
+                    <img src={playerDetail.cover} className="rounded-2xl h-[53px]  w-[53px] md:h-12 md:w-12 mr-3 font-bold"/>
                     <div className='text-white truncate'>
                         <p className='text-sm '>{playerDetail.title}</p>
                         <span className='text-[10px] text-white/[0.44]'>{playerDetail.artist}</span>
                     </div>
                 </div>
                 <div className='flex flex-col md:w-3/5 mx-9 grow-0'>
-                    <div className='flex items-center justify-center mb-8'>
+                    <div className='flex items-center justify-center md:mb-8'>
                         <svg width="16" height="17" className="shuffle hidden md:inline-block h-4 mr-11 play-icon"  onClick={shuffle} viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M14.5 12.7593C14.5 12.746 14.4933 12.7327 14.4933 12.7193C14.4867 12.666 14.48 12.6127 14.46 12.566C14.4333 12.506 14.4 12.4593 14.36 12.4127C14.36 12.4127 14.36 12.406 14.3533 12.406C14.3067 12.3593 14.2533 12.326 14.1933 12.2993C14.1333 12.2727 14.0667 12.2593 14 12.2593L10.8867 12.2727C10.8867 12.2727 10.8867 12.2727 10.88 12.2727C10.48 12.2727 10.0933 12.086 9.85333 11.766L9.04 10.7193C8.87333 10.4993 8.56 10.4593 8.34 10.6327C8.12 10.806 8.08 11.1127 8.25333 11.3327L9.06666 12.3793C9.5 12.9393 10.18 13.2727 10.8867 13.2727H10.8933L12.7933 13.266L12.32 13.7393C12.1267 13.9327 12.1267 14.2527 12.32 14.446C12.42 14.546 12.5467 14.5927 12.6733 14.5927C12.8 14.5927 12.9267 14.546 13.0267 14.446L14.36 13.1127C14.4067 13.066 14.44 13.0127 14.4667 12.9527C14.4867 12.886 14.5 12.8193 14.5 12.7593Z" fill="white"/>
                             <path d="M5.61333 5.23266C5.18 4.63266 4.48667 4.27933 3.74667 4.27933C3.74 4.27933 3.74 4.27933 3.73333 4.27933L2 4.28599C1.72667 4.28599 1.5 4.51266 1.5 4.78599C1.5 5.05933 1.72667 5.28599 2 5.28599L3.74 5.27933H3.74667C4.16667 5.27933 4.56 5.47933 4.8 5.81933L5.52 6.81933C5.62 6.95266 5.77333 7.02599 5.92667 7.02599C6.02667 7.02599 6.13333 6.99266 6.22 6.93266C6.44667 6.76599 6.49333 6.45266 6.33333 6.23266L5.61333 5.23266Z" fill="white"/>
@@ -69,30 +65,17 @@ function Player(){
                         </svg>
 
                         <img src={previous} onClick={prevTrack} className="hidden md:inline-block h-4 mr-11 play-icon"/>
-                        <div onClick={togglePlay} className='mr-11 h-[25px] w-[25px] text-white text-xs rounded-full bg-primary-yellow shadow-[0_0_18px_rgba(255,255,255,0.3)] flex items-center justify-center'>
+                        <div onClick={togglePlay} className='mr-6 md:mr-11 h-[25px] w-[25px] text-white text-xs rounded-full bg-primary-yellow shadow-[0_0_18px_rgba(255,255,255,0.3)] flex items-center justify-center'>
+                            {audioPlayer.paused ? 
                             <svg width="9" height="10" viewBox="0 0 9 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.333344 4.77269V2.95366C0.333344 0.619264 1.98563 -0.33566 4.0017 0.831537L5.57814 1.741L7.15463 2.65047C9.17069 3.81767 9.17069 5.7277 7.15463 6.8949L5.57814 7.80437L4.0017 8.71383C1.98563 9.88103 0.333344 8.92611 0.333344 6.59171V4.77269Z" fill="#EFEEE0"/>
+                            </svg> : 
+                            <svg width="9" height="12" viewBox="0 0 53 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="5" y="6" width="18" height="53" rx="9" fill="white"/>
+                                <rect x="30" y="6" width="18" height="53" rx="9" fill="white"/>
                             </svg>
+                            }
                         </div>
-
-                        {/* <svg width="61" height="62" viewBox="0 0 61 62" className="md:mr-11"  fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g filter="url(#filter0_d_12010_172)">
-                                <rect x="18" y="18" width="25" height="25.5453" rx="12.5" fill="#FACD66" shapeRendering="crispEdges"/>
-                                <path d="M26.3333 30.7727V28.9537C26.3333 26.6193 27.9856 25.6643 30.0017 26.8315L31.5781 27.741L33.1546 28.6505C35.1707 29.8177 35.1707 31.7277 33.1546 32.8949L31.5781 33.8044L30.0017 34.7138C27.9856 35.881 26.3333 34.9261 26.3333 32.5917V30.7727Z" fill="#EFEEE0"/>
-                            </g>
-                            <defs>
-                                <filter id="filter0_d_12010_172" x="0" y="0" width="61" height="61.5453" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
-                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                                    <feOffset/>
-                                    <feGaussianBlur stdDeviation="9"/>
-                                    <feComposite in2="hardAlpha" operator="out"/>
-                                    <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.3 0"/>
-                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_12010_172"/>
-                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_12010_172" result="shape"/>
-                                </filter>
-                            </defs>
-                        </svg> */}
                         <img src={nextIcon} onClick={nextTrack} className="h-4 md:mr-11 hover:cursor-pointer play-icon"/>
                         <svg width="16" className="repeat hidden md:inline-block h-4 fill-primary-yellow play-icon" onClick={loop} height="17" viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.60666 12.226C2.48 12.226 2.35333 12.1793 2.25333 12.0793C1.34 11.1593 0.833328 9.94596 0.833328 8.65929C0.833328 5.98596 2.99999 3.81263 5.66666 3.81263L9.71333 3.82596L8.98666 3.13263C8.78666 2.93929 8.77999 2.62596 8.97333 2.42596C9.16666 2.22596 9.48 2.21929 9.68 2.41263L11.3067 3.97263C11.4533 4.11263 11.5 4.33263 11.4267 4.51929C11.3533 4.70596 11.1667 4.83263 10.96 4.83263L5.66666 4.81929C3.55333 4.81929 1.83333 6.54596 1.83333 8.66596C1.83333 9.68596 2.23333 10.6526 2.96 11.3793C3.15333 11.5726 3.15333 11.8926 2.96 12.086C2.86 12.1793 2.73333 12.226 2.60666 12.226Z" fill="white"/>

@@ -63,3 +63,17 @@
   fill: #FACD66;
   fill-opacity: 1;
 }
+
+.nav-link svg{
+  fill: #EFEEE0;
+  fill-opacity: 0.25;
+}
+
+.nav-link.active svg{
+  fill: #FACD66;
+  fill-opacity: 1;
+}
+
+.nav-link.active p{
+  color: #fff;
+}

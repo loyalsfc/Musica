@@ -68,7 +68,7 @@ function Home(){
         
             <div className='w-full overflow-hidden pb-20'>
                 <section className='flex flex-col lg:flex-row mb-10'>
-                    <div className='bg-[#609EAF] h-[70vh] lg:h-[373px] lg:w-2/3 relative rounded-[40px] flex  text-white lg:mr-6 overflow-hidden shadow-[0_15px_22px_-20px_rgba(122,144,150,1)]'>
+                    <div className='bg-[#609EAF] h-[70vh] max-h-[503px] md:h-[373px] lg:w-2/3 relative rounded-[40px] flex  text-white lg:mr-6 overflow-hidden shadow-[0_15px_22px_-20px_rgba(122,144,150,1)]'>
                         <img src={vector} className="absolute -right-36 -top-20 md:right-0 md:top-0 rotate-90 md:rotate-0"/>
                         <div className='h-full flex flex-col lg:justify-between py-[38px] px-8 lg:px-[45px] z-10'>
                             <span className='mb-auto lg:mb-0'>Curated playlist</span>
