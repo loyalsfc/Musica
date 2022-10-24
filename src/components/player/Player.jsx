@@ -6,12 +6,20 @@ import previous from '../../assets/icons/previous.svg'
 // import repeatIcon from '../../assets/icons/repeate-one.svg'
 // import shuffle from '../../assets/icons/shuffle.svg'
 import soundIcon from '../../assets/icons/sound.svg'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Context } from '../../Context'
 
 function Player(){
-    const {playerSrc, audioPlayer, playerDetail, togglePlay, nextTrack, prevTrack, setIsShuffle} = useContext(Context)
-   
+    const {playerSrc, audioPlayer, playerDetail, togglePlay, nextTrack, prevTrack, setIsShuffle, currentTime, musicDuration} = useContext(Context)
+    const voluweWrapper = document.querySelector('.volume-wrapper')
+    const [volume, setVolume] = useState(1)
+
+    //Update the player volume when the volume state changed
+    useEffect(() => {
+        audioPlayer.volume = volume
+    }, [volume])
+
+    //Active loop and set the loop element fill to yellow
     function loop(){
         document.querySelectorAll('.repeat path').forEach(item => {
             item.classList.toggle('fill-primary-yellow')
@@ -30,12 +38,19 @@ function Player(){
         setIsShuffle(prevState => !prevState)
     }
 
+    //Set volume state
     const handleClick = (e) => {
-        console.log(e)
+        const selectedLength = e.clientX - voluweWrapper.offsetLeft
+        setVolume((selectedLength / voluweWrapper.clientWidth).toFixed(2))
+    }
+
+    // sleek player
+    const handleChange = (e) => {
+        audioPlayer.currentTime = e.target.value
     }
 
     return(
-        <div className="fixed bottom-0 bg-[rgba(29,33,35,0.3)] border-t border-white/[0.1] backdrop-blur-lg py-0 lg:py-4 w-full pl-6 -ml-6 lg:ml-0 z-50">
+        <div className="fixed bottom-0 bg-[rgba(29,33,35,0.3)] border-t border-white/[0.1] backdrop-blur-lg py-0 lg:py-6 w-full pl-6 -ml-6 lg:ml-0 z-50">
             <audio id='audio-player' src={playerSrc}></audio>
             <div className='container mx-auto flex items-center justify-between'>
                 <div className='flex items-center w-1/5 grow-0'>
@@ -46,8 +61,7 @@ function Player(){
                     </div>
                 </div>
                 <div className='flex flex-col md:w-3/5 mx-9 grow-0'>
-                    <div className='flex items-center justify-center'>
-                        {/* <img src={shuffle} className="hidden md:inline-block h-4 mr-11 play-icon"/> */}
+                    <div className='flex items-center justify-center mb-8'>
                         <svg width="16" height="17" className="shuffle hidden md:inline-block h-4 mr-11 play-icon"  onClick={shuffle} viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M14.5 12.7593C14.5 12.746 14.4933 12.7327 14.4933 12.7193C14.4867 12.666 14.48 12.6127 14.46 12.566C14.4333 12.506 14.4 12.4593 14.36 12.4127C14.36 12.4127 14.36 12.406 14.3533 12.406C14.3067 12.3593 14.2533 12.326 14.1933 12.2993C14.1333 12.2727 14.0667 12.2593 14 12.2593L10.8867 12.2727C10.8867 12.2727 10.8867 12.2727 10.88 12.2727C10.48 12.2727 10.0933 12.086 9.85333 11.766L9.04 10.7193C8.87333 10.4993 8.56 10.4593 8.34 10.6327C8.12 10.806 8.08 11.1127 8.25333 11.3327L9.06666 12.3793C9.5 12.9393 10.18 13.2727 10.8867 13.2727H10.8933L12.7933 13.266L12.32 13.7393C12.1267 13.9327 12.1267 14.2527 12.32 14.446C12.42 14.546 12.5467 14.5927 12.6733 14.5927C12.8 14.5927 12.9267 14.546 13.0267 14.446L14.36 13.1127C14.4067 13.066 14.44 13.0127 14.4667 12.9527C14.4867 12.886 14.5 12.8193 14.5 12.7593Z" fill="white"/>
                             <path d="M5.61333 5.23266C5.18 4.63266 4.48667 4.27933 3.74667 4.27933C3.74 4.27933 3.74 4.27933 3.73333 4.27933L2 4.28599C1.72667 4.28599 1.5 4.51266 1.5 4.78599C1.5 5.05933 1.72667 5.28599 2 5.28599L3.74 5.27933H3.74667C4.16667 5.27933 4.56 5.47933 4.8 5.81933L5.52 6.81933C5.62 6.95266 5.77333 7.02599 5.92667 7.02599C6.02667 7.02599 6.13333 6.99266 6.22 6.93266C6.44667 6.76599 6.49333 6.45266 6.33333 6.23266L5.61333 5.23266Z" fill="white"/>
@@ -55,7 +69,13 @@ function Player(){
                         </svg>
 
                         <img src={previous} onClick={prevTrack} className="hidden md:inline-block h-4 mr-11 play-icon"/>
-                        <svg width="61" height="62" viewBox="0 0 61 62" className="md:mr-11" onClick={togglePlay} fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <div onClick={togglePlay} className='mr-11 h-[25px] w-[25px] text-white text-xs rounded-full bg-primary-yellow shadow-[0_0_18px_rgba(255,255,255,0.3)] flex items-center justify-center'>
+                            <svg width="9" height="10" viewBox="0 0 9 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.333344 4.77269V2.95366C0.333344 0.619264 1.98563 -0.33566 4.0017 0.831537L5.57814 1.741L7.15463 2.65047C9.17069 3.81767 9.17069 5.7277 7.15463 6.8949L5.57814 7.80437L4.0017 8.71383C1.98563 9.88103 0.333344 8.92611 0.333344 6.59171V4.77269Z" fill="#EFEEE0"/>
+                            </svg>
+                        </div>
+
+                        {/* <svg width="61" height="62" viewBox="0 0 61 62" className="md:mr-11"  fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g filter="url(#filter0_d_12010_172)">
                                 <rect x="18" y="18" width="25" height="25.5453" rx="12.5" fill="#FACD66" shapeRendering="crispEdges"/>
                                 <path d="M26.3333 30.7727V28.9537C26.3333 26.6193 27.9856 25.6643 30.0017 26.8315L31.5781 27.741L33.1546 28.6505C35.1707 29.8177 35.1707 31.7277 33.1546 32.8949L31.5781 33.8044L30.0017 34.7138C27.9856 35.881 26.3333 34.9261 26.3333 32.5917V30.7727Z" fill="#EFEEE0"/>
@@ -72,7 +92,7 @@ function Player(){
                                     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_12010_172" result="shape"/>
                                 </filter>
                             </defs>
-                        </svg>
+                        </svg> */}
                         <img src={nextIcon} onClick={nextTrack} className="h-4 md:mr-11 hover:cursor-pointer play-icon"/>
                         <svg width="16" className="repeat hidden md:inline-block h-4 fill-primary-yellow play-icon" onClick={loop} height="17" viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.60666 12.226C2.48 12.226 2.35333 12.1793 2.25333 12.0793C1.34 11.1593 0.833328 9.94596 0.833328 8.65929C0.833328 5.98596 2.99999 3.81263 5.66666 3.81263L9.71333 3.82596L8.98666 3.13263C8.78666 2.93929 8.77999 2.62596 8.97333 2.42596C9.16666 2.22596 9.48 2.21929 9.68 2.41263L11.3067 3.97263C11.4533 4.11263 11.5 4.33263 11.4267 4.51929C11.3533 4.70596 11.1667 4.83263 10.96 4.83263L5.66666 4.81929C3.55333 4.81929 1.83333 6.54596 1.83333 8.66596C1.83333 9.68596 2.23333 10.6526 2.96 11.3793C3.15333 11.5726 3.15333 11.8926 2.96 12.086C2.86 12.1793 2.73333 12.226 2.60666 12.226Z" fill="white"/>
@@ -81,16 +101,20 @@ function Player(){
                         </svg>
                     </div>
                     <div className='hidden md:block h-1 bg-white/[0.04] w-full rounded relative'>
-                        <div className='w-1/2 bg-primary-yellow h-full rounded player'></div>
-                        <div className='h-3 w-3 rounded-full border border-white absolute inset-1/2 -translate-x-1/2 -translate-y-1/2 p-0.5'>
+                        <input type='range' className='opacity-0 absolute w-full h-1  hidden md:block' max={musicDuration} onChange={handleChange} />
+                        <div className='bg-primary-yellow h-full rounded player' style={{width: currentTime + '%'}}></div>
+                        <div 
+                            className='h-3 w-3 rounded-full border border-white absolute top-1/2 -translate-x-1/2 -translate-y-1/2 p-0.5' 
+                            style={{left: currentTime + '%'}}
+                        >
                             <div className='h-full w-full rounded-full bg-primary-yellow shadow-[0_0_8px_rgba(0,0,0,0.92)]'></div>
                         </div>
                     </div>
                 </div>
                 <div className='hidden md:flex items-center w-1/5 grow-0'>
                     <img src={soundIcon}  className="mr-2"/>
-                    <div className='h-1 bg-white/[0.04] w-full rounded hover:cursor-pointer' onClick={handleClick}>
-                        <div className='w-1/2 bg-primary-yellow h-full rounded'></div>
+                    <div className='volume-wrapper h-1 bg-white/[0.04] w-full rounded hover:cursor-pointer' onClick={handleClick}>
+                        <div className='bg-primary-yellow h-full rounded' style={{width: volume * 100 + '%'}}></div>
                         {/* <input type="range" className='volume-slider h-1 w-full bg-primary-yellow rounded-full' /> */}
                     </div>
                 </div>

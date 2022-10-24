@@ -9,7 +9,7 @@ function ContextProvider(props){
     const [audioPlayer, setAudioPlayer] = useState(document.createElement('audio'));
     const [playerDetail, setPlayerDetail] = useState({cover: "https://is2-ssl.mzstatic.com/image/thumb/Music122/v4/ff/ee/a8/ffeea8ba-38af-138f-045f-013bf8072cb2/194690959790_cover.jpg/400x400cc.jpg", title: "Cough (Odo)", duration: "", artist: "EMPIRE & Kizz Daniel"})
     const [musicDuration, setMusicDuration] = useState('')
-    const [currentTime, setCurrentTime] = useState('')
+    const [currentTime, setCurrentTime] = useState(0)
     const [tracksQueue, setTracksQueue] = useState(TopMusic)
     const [trackIndex, setTrackIndex] = useState(0)
     const [isShuffle, setIsShuffle] = useState(false)
@@ -41,8 +41,6 @@ function ContextProvider(props){
          setCurrentTime((audioPlayer.currentTime / audioPlayer.duration) * 100)
     } 
 
-    console.log(musicDuration)
-
     function setCurrentTrack(index){
         const {hub, images, title, subtitle} = tracksQueue[index]
         const url = hub.actions[1].uri
@@ -59,6 +57,11 @@ function ContextProvider(props){
     audioPlayer.onended = () => {
         nextTrack()
     }; 
+
+    //Moving play progress
+    audioPlayer.ontimeupdate = () => {
+        setCurrentTime((audioPlayer.currentTime / musicDuration * 100).toFixed(2))
+    }
     // Convert milliseconds to minute and seconds
     function millisecondsToMinute(milliseconds){
         const second = Math.floor(milliseconds / 1000);
@@ -114,6 +117,8 @@ function ContextProvider(props){
                 nextTrack,
                 prevTrack,
                 setIsShuffle,
+                currentTime,
+                musicDuration,
             }}
         >
             {props.children}

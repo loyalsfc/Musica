@@ -35,19 +35,31 @@
 .collection-container:hover > img {
   transform: scale(1.2);
 }
-/* .likes{
-  display: none;
-} */
 
 .collection-container:hover .likes {
-  display: block;
+  margin-bottom: 0;
 }
 
-.volume-slider {
+.collection-container:hover .play-icon{
+  opacity: 1;
+}
+
+.slider {
   -webkit-appearance: none;
+  background: transparent;
 }
 
-.volume-slider::-webkit-slider-thumb {
+.slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
+}
+
+.navlink-icon{
+  fill: #EFEEE0;
+  fill-opacity: 0.25;
+}
+
+.navlink-icon.active{
+  fill: #FACD66;
+  fill-opacity: 1;
 }
