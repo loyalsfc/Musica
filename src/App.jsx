@@ -4,12 +4,7 @@ import { useState, useContext } from 'react'
 import { Context } from './Context'
 import Header from './components/Header/Header'
 import SideNav from './components/sideNav/SideNav'
-import Home from './pages/home/Home'
-import Playlist from './pages/playlist/Playlist'
-import Collection from './pages/collection/Collection'
 import Player from './components/player/Player'
-
-import leadImage from './assets/images/Lead-image.png'
 
 function App() {
   const {playlistBG} = useContext(Context)

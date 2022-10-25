@@ -14,6 +14,8 @@ import MusicList from './MusicList'
 
 import { useContext } from 'react'
 
+import Transitions from '../../components/animation/AnimatedRoute'
+
 
 function Home(){
     const {setPlaylistBG, millisecondsToMinute} = useContext(Context);
@@ -65,7 +67,8 @@ function Home(){
     })
 
     return(
-        
+        <>
+        <Transitions> 
             <div className='w-full overflow-hidden pb-20'>
                 <section className='flex flex-col lg:flex-row mb-10'>
                     <div className='bg-[#609EAF] h-[70vh] max-h-[503px] md:h-[373px] lg:w-2/3 relative rounded-[40px] flex  text-white lg:mr-6 overflow-hidden shadow-[0_15px_22px_-20px_rgba(122,144,150,1)]'>
@@ -127,7 +130,8 @@ function Home(){
                 </div>
                 
             </div>
-        // </main>
+        </Transitions>
+        </>
     )
 }
 

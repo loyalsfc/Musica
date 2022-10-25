@@ -7,11 +7,14 @@ import {
   createBrowserRouter,
   RouterProvider,
   Route,
+  useLocation
 } from "react-router-dom";
 import ErrorPage from './ErrorPage'
 import Home from './pages/home/Home'
 import Playlist from './pages/playlist/Playlist'
 import Collection from './pages/collection/Collection'
+
+// const location = useLocation()
 
 const router = createBrowserRouter([
   {
@@ -33,10 +36,6 @@ const router = createBrowserRouter([
       }
     ]
   },
-  // {
-  //   path: '/home',
-  //   element: <Home />
-  // }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

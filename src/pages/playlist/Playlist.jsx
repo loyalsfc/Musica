@@ -8,6 +8,7 @@ import MusicCard from "./Cards"
 import playIcon from  '../../assets/icons/play-new.svg'
 import collectionIcon from '../../assets/icons/music-square-add.svg'
 import heartIcon from '../../assets/icons/red-heart.svg'
+import Transitions from "../../components/animation/AnimatedRoute"
 
 function Playlist(){
     const {playlistId} = useParams();
@@ -49,30 +50,34 @@ function Playlist(){
     })
 
     return(
-            <section className="w-full text-white pb-20">
-                <div className="flex lg:items-end flex-col lg:flex-row mb-6 lg:mb-12">
-                    <img src={currentPlaylist.images} alt="banner image" className="mb-6 lg:mb-0 lg:mr-7 w-full lg:w-[18rem] rounded-[35px]" />
-                    <article>
-                        <h4 className="text-4xl font-bold mb-2 text-[#A4C7C6]">{currentPlaylist.name}</h4>
-                        <p className="text-sm text-[#EFEEE0] mb-2.5 max-w-[33rem]">{currentPlaylist.description}</p>
-                        <p className="text-sm text-[#EFEEE0]">10 songs ~ 1hr+</p>
-                        <div className="flex mt-6 lg:mt-10">
-                            <button className="buttons-play">
-                                <img src={playIcon} className="mr-3" /> Play all
-                            </button>
-                            <button className="buttons-play">
-                                <img src={collectionIcon} className="mr-3" /> Add to collection
-                            </button>
-                            <button className="buttons-play">
-                                <img src={heartIcon} />
-                            </button>
+            <>
+                <Transitions>
+                    <section className="w-full text-white pb-20 min-h-screen">
+                        <div className="flex sm:items-end flex-col sm:flex-row mb-6 sm:mb-12">
+                            <img src={currentPlaylist.images} alt="banner image" className="mb-6 sm:mb-0 sm:mr-7 w-full sm:w-[18rem] rounded-[35px]" />
+                            <article>
+                                <h4 className="text-4xl font-bold mb-2 text-[#A4C7C6]">{currentPlaylist.name}</h4>
+                                <p className="text-sm text-[#EFEEE0] mb-2.5 max-w-[33rem]">{currentPlaylist.description}</p>
+                                <p className="text-sm text-[#EFEEE0]">10 songs ~ 1hr+</p>
+                                <div className="flex mt-6 sm:mt-10">
+                                    <button className="buttons-play">
+                                        <img src={playIcon} className="mr-3" /> Play all
+                                    </button>
+                                    <button className="buttons-play">
+                                        <img src={collectionIcon} className="mr-3" /> Add to collection
+                                    </button>
+                                    <button className="buttons-play">
+                                        <img src={heartIcon} />
+                                    </button>
+                                </div>
+                            </article>
                         </div>
-                    </article>
-                </div>
-                <div>
-                    {musicTracks}
-                </div>
-            </section>
+                        <div>
+                            {musicTracks}
+                        </div>
+                    </section>
+                </Transitions>
+            </>
     )
 }
 
